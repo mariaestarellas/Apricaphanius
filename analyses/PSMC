@@ -1,6 +1,6 @@
 # PSMC
 
-***1)*** We need a .bam file as an input and the reference genome. This analysis is done for each sample (which needs to be at higher coverage). We need to set -d to 1/3 of our coverage and -D to the double (given that our coverage is 13.8)
+1) We need a .bam file as an input and the reference genome. This analysis is done for each sample (which needs to be at higher coverage). We need to set -d to 1/3 of our coverage and -D to the double (given that our coverage is 13.8)
 
 bcftools mpileup -C50 -f whole_path/reference.fa CN21596.bam | bcftools call -c - | vcfutils.pl vcf2fq -d 4.6  -D 27.6 | gzip > CN21596_diploid.fq.gz
 
