@@ -1,0 +1,4 @@
+for i in $(cat samples.txt)
+do
+/home/goliath/software/samtools1.6/samtools-1.6/samtools depth -a ${i}_mkdup_30.bam |awk '{sum+=$3} END { print "${i} Average = ",sum/NR}'
+done
