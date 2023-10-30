@@ -1,0 +1,6 @@
+1. Indexing the reference genome
+bwa index AphaniusSeq_MaSuRCA-polished.fa
+
+2. Other files we'll need
+samtools faidx AphaniusSeq_MaSuRCA-polished.fa
+java -jar picard/picard.jar CreateSequenceDictionary R=AphaniusSeq_MaSuRCA-polished.fa O=AphaniusSeq_MaSuRCA-polished.dict
