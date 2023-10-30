@@ -6,8 +6,3 @@ do
 bwa mem -t 20 -M ~/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa ${i}_1.out.fq.gz ${i}_2.out.fq.gz -R "@RG\tID:"${i}"\tSM:"${i}"" | samtools sort -@20 -o ${i}.bam
 done
 
-2. Mark & remove duplicate reads:
-for i in $(cat samples.txt)
-do
-java -jar /mnt/DiscoC/maria/picard/picard.jar MarkDuplicates INPUT= ${i}.bam OUTPUT=${i}_mkdup.bam METRICS_FILE=${i}.txt ASSUME_SORT_ORDER=coordinate REMOVE_DUPLICATES=TRUE CREATE_INDEX=True TMP_DIR=/tmp
-done
