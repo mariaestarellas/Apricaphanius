@@ -1,0 +1,17 @@
+2. Mark & remove duplicate reads:
+for i in $(cat samples.txt)
+do
+java -jar /mnt/DiscoC/maria/picard/picard.jar MarkDuplicates INPUT= ${i}.bam OUTPUT=${i}_mkdup.bam METRICS_FILE=${i}.txt ASSUME_SORT_ORDER=coordinate REMOVE_DUPLICATES=TRUE CREATE_INDEX=True TMP_DIR=/tmp
+done
+
+3. Quality filter
+for i in $(cat samples.txt)
+do
+samtools view -q 30 -F 260 -b ${i}_mkdup.bam -o ${i}_mkdup_30.bam
+done
+
+4. Index
+for i in $(cat samples.txt)
+do
+samtools index {i}_mkdup_30.bam
+done
