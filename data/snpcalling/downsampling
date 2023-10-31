@@ -1,0 +1,6 @@
+Samples at higher coverage should be downsampled
+  
+java -jar /mnt/DiscoC/maria/picard/picard.jar DownsampleSam \
+I="$i"_mkdup_30.bam \
+O=$i.2_mkdup_30_downsampled.bam \
+P=0.65
