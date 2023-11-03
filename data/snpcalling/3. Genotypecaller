@@ -1,0 +1,9 @@
+for i in $(cat samples.txt);
+do
+gatk GenotypeGVCFs --reference  --variant "$i".g.vcf.gz --include-non-variant-sites --output final_dataset_"$i".vcf.gz
+done
+
+
+Finally we concatenate all the samples to form one VCF
+
+ bcftools concat final_dataset*.vcf.gz -o allaphanius.vcf.gz
