@@ -1,6 +1,6 @@
 for i in $(cat samples.txt);
 do
-gatk GenotypeGVCFs --reference  --variant "$i".g.vcf.gz --include-non-variant-sites --output final_dataset_"$i".vcf.gz
+gatk GenotypeGVCFs --reference  --variant "$i".g.vcf.gz --include-non-variant-sites --output genotypecaller/final_dataset_"$i".vcf.gz
 done
 
 
