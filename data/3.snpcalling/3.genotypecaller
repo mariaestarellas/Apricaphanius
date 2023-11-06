@@ -1,8 +1,7 @@
 for i in $(cat samples.txt);
 do
-gatk GenotypeGVCFs --reference  --variant "$i".g.vcf.gz --include-non-variant-sites --output genotypecaller/final_dataset_"$i".vcf.gz
+/home/goliath/software/gatk-4.1.3.0/gatk GenotypeGVCFs --reference /home/goliath/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa  --variant "$i".g.vcf.gz --include-non-variant-sites --output genotypecaller/final_dataset_"$i".vcf.gz
 done
-
 
 Finally we concatenate all the samples to form one VCF
 
