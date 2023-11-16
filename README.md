@@ -1,6 +1,6 @@
-# Apricaphanius
+# Aphanius
 # M&M
-We sequenced 44 individuals of _Apricaphanius iberus_ from W localitites, 1 of _Aphanius anatoliae_ 1 of _Apricaphanius baeticus_. A map showing all localities is included in **Fig1**. 
+We sequenced 44 individuals of _Aphanius iberus_ from W localitites, 1 of _Aphanius anatoliae_ 1 of _Aphanius baeticus_. A map showing all localities is included in **Fig1**. 
 Coverage of around 8X for all individuals, with the exception of CN21596, CN21784, AT30199 and AT6981 which are at 13X Illumina. The reference genome from Doadrio. 
 
 1) Filtering raw data
