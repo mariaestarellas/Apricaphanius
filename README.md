@@ -1,7 +1,10 @@
 # Apricaphanius
 # M&M
-We sequenced X individuals of _Apricaphanius iberus_ from W localitites and Y of _Apricaphanius baeticus_. A map showing all localities is included in **Fig1**. 
-Coverage of 10X for all individuals, with the exception of CN21596 and CN21784 which are at 15X Illumina. The reference genome from Doadrio. 
+We sequenced 44 individuals of _Apricaphanius iberus_ from W localitites, 1 of _Aphanius anatoliae_ 1 of _Apricaphanius baeticus_. A map showing all localities is included in **Fig1**. 
+Coverage of around 8X for all individuals, with the exception of CN21596, CN21784, AT30199 and AT6981 which are at 13X Illumina. The reference genome from Doadrio. 
+
+Downsampling: CN21596(0.65), CN21784(0.65), AT30199(0.55) and AT6981(0.8) -> CN21596.2, CN21784.2, AT30199.2 and AT6981.2
+
 
 # PSMC
 For 2 individuals, one from Tarragona and one from Griona (CN21596 from Madrigueres TGN and CN21784 from Bassa del Pi GIR) both at high coverage 13.8X and 13.65X. 
