@@ -1,1 +1,10 @@
+We have to create a table with different fields of the VCF. With the -F flag we can specify which fiels we want to extract. 
+QD= Quality Depth, MQ= Mapping Quality, FS= Fisher Strand test, SOR= StrandOddsRatio, MQRankSum, ReadPosRankSum. 
 
+/home/goliath/software/gatk-4.1.3.0/gatk VariantsToTable -V aphanius_final_dataset.vcf.gz -F QD -F FS -F SOR -F MQ -FMQRankSum -F ReadPosRankSum -O aphanius_final_dataset.table
+
+/home/goliath/software/gatk-4.1.3.0/gatk SelectVariants -R /home/goliath/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa \
+-V aphanius_final_dataset.vcf.gz -select "QD < 10.0 && MQ < 50.0 && FS > 10.0 && SOR > 4.0 && MQRankSum < -5.0 && MQRankSum > 5.0 
+&& ReadPosRankSum < -5.0 && ReadPosRankSum > 5.0" -O aphanius_final_dataset_gatk.vcf.gz
+
+vcftools --gzvcf file.vcf.gz --min-alleles 2 --max-alleles 2 --remove-indels --minQ 30 --min-meanDP 4 --max-meanDP 150 --minDP 4 --maxDP 150 --max-missing 0.8 --recode --stdout |gzip -c > file_filtered.vcf.gz
