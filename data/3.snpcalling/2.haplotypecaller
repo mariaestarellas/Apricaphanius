@@ -6,3 +6,60 @@ done
 wait
 
 We're not doing it chromosome by chromosome bc the reference genome is in contigs, and there are too many in order to combine them efficiently afterwards. 
+But we still need to combine the gvcfs from haplotypecaller:
+
+/home/goliath/software/gatk-4.1.3.0/gatk CombineGVCFs\
+         -R /home/goliath/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa\
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21582.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21591.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21596.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21598.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21623.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21632.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21637.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21638.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21640.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21642.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21655.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21656.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21657.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21681.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21682.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21688.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21700.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21703.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21706.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21715.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21727.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21728.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21730.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21732.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21754.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21756.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21758.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21760.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21766.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21777.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21782.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21784.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21806.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT_29056.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT_29067.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT_29087.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT_29851.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT_4839.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT_5157.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT29861.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21809.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21810.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21814.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21815.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT30199.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT30199.2.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT6981.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT6981.2.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21596.2.g.vcf.gz \
+        -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21784.2.g.vcf.gz \
+        -O all_aphanius.g.vcf.gz
+
+
