@@ -60,6 +60,7 @@ But we still need to combine the gvcfs from haplotypecaller:
         -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/AT6981.2.g.vcf.gz \
         -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21596.2.g.vcf.gz \
         -V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/CN21784.2.g.vcf.gz \
+         --convert-to-base-pair-resolution \
         -O all_aphanius.g.vcf.gz
 
 
