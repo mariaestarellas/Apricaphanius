@@ -63,4 +63,6 @@ But we still need to combine the gvcfs from haplotypecaller:
          --convert-to-base-pair-resolution \
         -O all_aphanius.g.vcf.gz
 
+Actually, Gabri gave me this command to make the list more efficiently: --variant $(ls "$list"*/*"$i"*.g.vcf | sed -n 1p) \
+
 
