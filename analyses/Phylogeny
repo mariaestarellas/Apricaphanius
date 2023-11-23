@@ -1,0 +1,7 @@
+#1 Create consensus
+
+for i in $(cat names.txt);
+do
+angsd -i "$i".bam -doFasta 3 -out /home/goliath/DiscoC/aphanius/analyses/phylogeny/"$i"
+done
+
