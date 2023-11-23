@@ -1,6 +1,5 @@
-for i in $(cat sample_names.txt)
+for i in $(cat names.txt)
 do
-fastp -i "$dir""$i"_1.fastq.gz -I "$dir""$i"_2.fastq.gz -o "$dir"fastp/"$i"_1_fastp30.fastq.gz -O "$dir"fastp/"$i"_2_fastp30.fastq.gz \
---detect_adapter_for_pe --correction --trim_poly_g --trim_poly_x -p --thread 2 --qualified_quality_phred 30 --adapter_sequence AGATCGGAAGAG \
---adapter_sequence_r2 AGATCGGAAGAG
+(fastp -i "${i}"*"_1.fq.gz" -I "${i}"*"_2.fq.gz" -o filtered/${i}_1.out.fq.gz -O filtered/${i}_2.out.fq.gz --detect_adapter_for_pe --adapter_sequence AGATCGGAAGAG --adapter_sequence_r2 AGATCGGAAGAG --correction --trim_poly_g --trim_poly_x -q 30 -w 10) &
 done
+wait
