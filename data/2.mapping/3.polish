@@ -13,5 +13,5 @@ done
 4. Index
 for i in $(cat samples.txt)
 do
-samtools index {i}_mkdup_30.bam
+samtools index ${i}_mkdup_30.bam
 done
