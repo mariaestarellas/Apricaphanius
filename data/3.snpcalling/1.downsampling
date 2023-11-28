@@ -4,3 +4,8 @@ java -jar /mnt/DiscoC/maria/picard/picard.jar DownsampleSam \
 I="$i"_mkdup_30.bam \
 O="$i"_2_mkdup_30.bam \
 P=0.65
+
+Careful with the Readgroup. To check which it is do:
+samtools view -H sample_mkdup_30.bam | grep '^@RG'
+
+You will see that it has teh same ID than the high coverage sample. We need to change this. 
