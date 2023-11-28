@@ -9,3 +9,17 @@ Careful with the Readgroup. To check which it is do:
 samtools view -H sample_mkdup_30.bam | grep '^@RG'
 
 You will see that it has teh same ID than the high coverage sample. We need to change this. 
+for i in $(cat names.txt)
+do
+(java -jar /home/goliath/software/picard2/picard.jar AddOrReplaceReadGroups \
+       I="$i"_mkdup_30.bam \
+       O=changerg/"$i"_mkdup_30.bam \
+       RGID="$i" \
+        RGLB=lib1 \
+       RGPL=ILLUMINA \
+       RGPU=unit1 \
+       RGSM="$i"
+)
+done
+
+For some reason it only works if we add the RGLD, RGPL and RGPU options, but I left them by default. 
