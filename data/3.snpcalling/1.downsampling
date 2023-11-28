@@ -2,7 +2,7 @@ Samples at higher coverage should be downsampled
   
 java -jar /mnt/DiscoC/maria/picard/picard.jar DownsampleSam \
 I="$i"_mkdup_30.bam \
-O="$i"_2_mkdup_30.bam \
+O="$i".2_mkdup_30.bam \
 P=0.65
 
 Careful with the Readgroup. To check which it is do:
