@@ -5,6 +5,18 @@ do
 done
 wait
 
+Check if the sample id for the downsampled individuals is correct:
+ bcftools query -l CN21596.2.g.vcf.gz
+
+In the case it's not, we can change it like this: 
+
+for i in $(cat downsampled.txt)
+do
+(java -jar /home/goliath/software/picard2/picard.jar RenameSampleInVcf \
+      INPUT="$i".g.vcf.gz \
+      OUTPUT=newid/"$i".g.vcf.gz \
+      NEW_SAMPLE_NAME="$i")
+done
 We're not doing it chromosome by chromosome bc the reference genome is in contigs, and there are too many in order to combine them efficiently afterwards. 
 But we still need to combine the gvcfs from haplotypecaller:
 
