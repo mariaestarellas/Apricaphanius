@@ -1,3 +1,10 @@
+#Create datasets:
+#1) 46 Aphanius including outgroups (A. iberus, A. baeticus and A. anatoliae). Similar coverage.
+#2) 44 Aphanius iberus of similar coverage.
+#3) 4 Aphanius of high coverage.
+
+bcftools view -S dataset3.txt all_aphanius_genotypes.vcf.gz  > dataset3.vcf.gz
+
 #We have to create a table with different fields of the VCF. With the -F flag we can specify which fiels we want to extract. 
 #QD= Quality Depth, MQ= Mapping Quality, FS= Fisher Strand test, SOR= StrandOddsRatio, MQRankSum, ReadPosRankSum. 
 
@@ -8,14 +15,14 @@
 && ReadPosRankSum < -5.0 && ReadPosRankSum > 5.0" -O aphanius_final_dataset_gatk.vcf.gz
 
 #We only keep biallelic snps, remove indels, filter for quality > 30, coverage and missing data:
-vcftools --gzvcf file.vcf.gz --min-alleles 2 --max-alleles 2 --remove-indels --minQ 30 --min-meanDP 4 --max-meanDP 150 --minDP 4 --maxDP 150 --max-missing 0.8 --recode --stdout |gzip -c > file_filtered.vcf.gz
+vcftools --gzvcf file.vcf.gz --min-alleles 2 --max-alleles 2 --remove-indels --minQ 30 --min-meanDP 4 --max-meanDP 150 --minDP 4 --maxDP 150 --max-missing 0.8  --maf 0.001 --recode --stdout |gzip -c > file_filtered.vcf.gz
 
 #Select only unlinked snps for Population structure analyses. 
-# -l usually is set at 0.1
+# -l usually is set at 0.1 (try both 0.1 and 0.5)
 bcftools +prune file_filtered.vcf.gz -l 0.5 -O z -o file_filtered_usnps.vcf.gz
 
 #Filter by allele frequency:
-vcftools --gzvcf file_filtered_usnps.vcf.gz --maf 0.01 --recode --stdout |gzip -c > file_filtered_usnps_maf.vcf.gz
+vcftools --gzvcf file_filtered_usnps.vcf.gz --recode --stdout |gzip -c > file_filtered_usnps_maf.vcf.gz
 
 #Identify and remove repetitive regions
 cat GCF_000181335.3_Felis_catus_9.0_genomic.fna| python scan_characters.py actg | bedtools merge -i - > lower_case_positions.bed
