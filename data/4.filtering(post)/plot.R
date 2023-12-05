@@ -1,9 +1,9 @@
 setwd ("~/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/")
 library(ggplot2)
-dataset3 <- read.delim("dataset3.table")
-x <- c("QD", "FS", "SOR", "MQ", "MQRankSum", "ReadPosRankSum")
-for (i in x){
+dataset <- read.delim("dataset3.table")
+y <- c("QD", "FS", "SOR", "MQ", "MQRankSum", "ReadPosRankSum")
+for (i in y){
 pdf(file= paste0(i, ".pdf"))
-ggplot(dataset3, aes(x= i)) + geom_density(color="darkblue", fill="lightblue")
+ggplot(dataset, aes(x= i)) + geom_density(color="darkblue", fill="lightblue")
 dev.off()
 }
