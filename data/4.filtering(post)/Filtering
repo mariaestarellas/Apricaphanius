@@ -11,6 +11,13 @@ bcftools view -S dataset3.txt all_aphanius_genotypes.vcf.gz  > dataset3.vcf.gz
 
 /home/goliath/software/gatk-4.1.3.0/gatk VariantsToTable -V dataset3.vcf.gz -F QD -F FS -F SOR -F MQ -FMQRankSum -F ReadPosRankSum -O filtervcf/dataset3.table
 
+#Now we'll plot in R
+setwd ("~/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/")
+dataset3 <- read.delim("dataset3.table")
+pdf(file="QD.pdf")
+ggplot(dataset3, aes(x=weight)) + geom_density(color="darkblue", fill="lightblue")
+dev.off()
+
 /home/goliath/software/gatk-4.1.3.0/gatk SelectVariants -R /home/goliath/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa \
 -V  dataset3.vcf.gz -select "QD < 10.0 && MQ < 50.0 && FS > 10.0 && SOR > 4.0 && MQRankSum < -5.0 && MQRankSum > 5.0 
 && ReadPosRankSum < -5.0 && ReadPosRankSum > 5.0" -O  dataset3_gatk.vcf.gz
