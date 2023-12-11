@@ -19,8 +19,8 @@ ggplot(dataset3, aes(x=weight)) + geom_density(color="darkblue", fill="lightblue
 dev.off()
 
 /home/goliath/software/gatk-4.1.3.0/gatk SelectVariants -R /home/goliath/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa \
--V  dataset3.vcf.gz -select "QD < 10.0 && MQ < 55.0 && FS > 50.0 && SOR > 5.0 && MQRankSum < -5.0 && MQRankSum > 5.0 
-&& ReadPosRankSum < -5.0 && ReadPosRankSum > 5.0" -O  dataset3_gatk.vcf.gz
+-V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/dataset1.vcf.gz -select "QD > 10.0 && MQ > 55.0 && FS < 50.0 && SOR < 5.0 && MQRankSum > -5.0 && MQRankSum < 5.0 && ReadPosRankSum > -5.0 && ReadPosRankSum < 5.0" -O  dataset1_gatk_try.vcf.gz
+
 
 #We only keep biallelic snps, remove indels, filter for quality > 30, coverage and missing data:
 vcftools --gzvcf file.vcf.gz --min-alleles 2 --max-alleles 2 --remove-indels --minQ 30 --min-meanDP 4 --max-meanDP 150 --minDP 4 --maxDP 150 --max-missing 0.8  --maf 0.001 --recode --stdout |gzip -c > file_filtered.vcf.gz
