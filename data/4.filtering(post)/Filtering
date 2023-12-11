@@ -19,7 +19,7 @@ bcftools view -S dataset3.txt all_aphanius_genotypes.vcf.gz  > dataset3.vcf.gz
 
 
 #We only keep biallelic snps, remove indels, filter for quality > 30, coverage and missing data:
-vcftools --gzvcf dataset1_gatk_try.vcf.gz --min-alleles 2 --max-alleles 2 --remove-indels --minQ 30 --min-meanDP 4 --max-meanDP 150 --minDP 2 --maxDP 20 --max-missing 0.8  --maf 0.001 --recode --stdout |gzip -c > dataset1_filtered.vcf.gz
+vcftools --gzvcf dataset1_gatk_try.vcf.gz --min-alleles 2 --max-alleles 2 --remove-indels --minQ 30 --minDP 2 --maxDP 20 --max-missing 0.8  --maf 0.001 --recode --stdout |gzip -c > dataset1_filtered.vcf.gz
 
 #Select only unlinked snps for Population structure analyses. 
 # -l usually is set at 0.1 (try both 0.1 and 0.5). -l is now -m
