@@ -19,14 +19,16 @@ bcftools view -S dataset3.txt all_aphanius_genotypes.vcf.gz  > dataset3.vcf.gz
 
 
 #We only keep biallelic snps, remove indels, filter for quality > 30, coverage and missing data:
+#For the DP we do for the min 1/3 of the coverage and for the max 2x
 vcftools --gzvcf dataset1_gatk_try.vcf.gz --min-alleles 2 --max-alleles 2 --remove-indels --minQ 30 --minDP 2 --maxDP 20 --max-missing 0.8  --maf 0.001 --recode --stdout |gzip -c > dataset1_filtered.vcf.gz
 
 #Select only unlinked snps for Population structure analyses. 
-# -l usually is set at 0.1 (try both 0.1 and 0.5). -l is now -m
-bcftools +prune dataset2_filtered.vcf.gz -m 0.5 -O z -o dataset2_filtered_usnps05.vcf.gz
+# -m usually is set at 0.1 but this is too restrictive, we use 0.5. 
+bcftools +prune dataset1_filtered.vcf.gz -m 0.5 -O z -o dataset1_filtered_usnps05.vcf.gz
 
 
 #Identify and remove repetitive regions
-cat GCF_000181335.3_Felis_catus_9.0_genomic.fna| python scan_characters.py actg | bedtools merge -i - > lower_case_positions.bed
+#Scan characters script by gubrins
+cat ~/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa | python scan_characters.py actg | bedtools merge -i - > lower_case_positions.bed
 
 bedtools intersect -v -a file.vcf -b lower_case_positions.bed |bgzip -c > filtered_file.vcf.gz
