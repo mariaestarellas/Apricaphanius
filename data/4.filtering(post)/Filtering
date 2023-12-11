@@ -33,3 +33,8 @@ cat ~/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-po
 
 #We do this for all the datasets (SNPs and uSNPs)
 bedtools intersect -v -a dataset1_filtered.vcf.gz -b ~/DiscoC/aphanius/copy_data/reference_genome/assembly/lower_case_positions.bed |bgzip -c > rmrepetitives/dataset1_filtered.vcf.gz
+
+#Files are created without the header. 
+zgrep '\#' dataset2_filtered_usnps05.vcf.gz > header_usnps.txt
+bgzip header_usnps.txt 
+zcat header_usnps.txt.gz dataset2_filtered_usnps05.vcf.gz > dataset2_filtered_usnps_.vcf.gz
