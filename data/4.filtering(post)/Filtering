@@ -31,4 +31,5 @@ bcftools +prune dataset1_filtered.vcf.gz -m 0.5 -O z -o dataset1_filtered_usnps0
 #Scan characters script by gubrins
 cat ~/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa | python scan_characters.py actg | bedtools merge -i - > lower_case_positions.bed
 
-bedtools intersect -v -a file.vcf -b lower_case_positions.bed |bgzip -c > filtered_file.vcf.gz
+#We do this for all the datasets (SNPs and uSNPs)
+bedtools intersect -v -a dataset1_filtered.vcf.gz -b ~/DiscoC/aphanius/copy_data/reference_genome/assembly/lower_case_positions.bed |bgzip -c > rmrepetitives/dataset1_filtered.vcf.gz
