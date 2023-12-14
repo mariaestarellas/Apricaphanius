@@ -1,1 +1,12 @@
+#1 Create bed file 
+plink --vcf filtered_usnps_maf.vcf.gz --make-bed --out output_name --allow-extra-chr --double-id
 
+#2 Change bim file
+awk '{$1=0;print $0}' output_name.bim > output_name.bim.tmp
+mv output_name.bim.tmp output_name.bim
+
+#3 Create ped
+plink --bfile output_name --recode12 --out output_name --allow-extra-chr
+
+#4 Admixture
+python admixture-wrapper_edited.py -i directory_containing_ped_file --kmin k_minima --kmax k_maxima --reps replicates --cv number_of_cross_validations -t threads 
