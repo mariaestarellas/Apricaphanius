@@ -17,7 +17,7 @@ for i in $(ls ~/DiscoC/aphanius/analyses/phylogeny/*fa); do grep -v ">" "$direct
 #we need to add the label name to each file. IMPORTANT, this will not work if there is more than one dot in the file_name!
 for i in $(ls *fa);
 do
-id=$(echo $i |cut -d. -f1) 
+id=$(echo $i |cut -d . -f1) 
 sed -i "1 i\>$id" $i
 done
 
