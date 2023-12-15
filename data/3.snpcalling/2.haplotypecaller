@@ -1,15 +1,4 @@
-Run haplotypecaller
-for i in $(cat samples.txt)
-do
-(/home/goliath/software/gatk-4.1.3.0/gatk HaplotypeCaller -R /home/goliath/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa -I "$i"_mkdup_30.bam -O haplotypecaller/"$i".g.vcf.gz -ERC BP_RESOLUTION) &
-done
-wait
-
-Check if the sample id for the downsampled individuals is correct:
- bcftools query -l CN21596.2.g.vcf.gz
-
-In the case it's not, we can change it like this: 
-                                                                      
+#We should change the readgroup for the .bam files
 for i in $(cat names.txt)
 do
 (java -jar /home/goliath/software/picard2/picard.jar AddOrReplaceReadGroups \
@@ -21,6 +10,23 @@ do
        RGPU=unit1 \
        RGSM="$i"
 )
+Run haplotypecaller
+for i in $(cat samples.txt)
+do
+(/home/goliath/software/gatk-4.1.3.0/gatk HaplotypeCaller -R /home/goliath/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa -I "$i"_mkdup_30.bam -O haplotypecaller/"$i".g.vcf.gz -ERC BP_RESOLUTION) &
+done
+wait
+
+Check if the sample id for the downsampled individuals is correct:
+ bcftools query -l CN21596.2.g.vcf.gz
+
+In the case it's not, we can change it like this:                                                                 
+
+java -jar /home/goliath/software/picard2/picard.jar RenameSampleInVcf \
+      INPUT="$i".g.vcf.gz \
+      OUTPUT=newid/"$i".g.vcf.gz \
+      NEW_SAMPLE_NAME="$i")
+
 donenot doing it chromosome by chromosome bc the reference genome is in contigs, and there are too many in order to combine them efficiently afterwards. 
 But we still need to combine the gvcfs from haplotypecaller:
 
