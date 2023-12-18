@@ -11,7 +11,7 @@ gunzip *gz
 
 #we will remove the contig names in the file:
 
-for i in $(ls ~/DiscoC/aphanius/analyses/phylogeny/*fa); do grep -v ">" "$directory""$i" > "$i"_no_chr.fa; done
+for i in $(ls ~/DiscoC/aphanius/analyses/phylogeny/*fa); do grep -v ">" "$i" > "$i"_no_chr.fa; done
 
 #3 Add label
 #we need to add the label name to each file. IMPORTANT, this will not work if there is more than one dot in the file_name!
