@@ -36,3 +36,8 @@ awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}'
 
 #I don't know why in the first line there is an empty space, so we remove it:
 tail -n +2 sliding_windows_aphanius_one_line2.fa > sliding_windows_aphanius_one_line.tmp && mv sliding_windows_aphanius_one_line.tmp sliding_windows_aphanius_one_line2.fa
+
+#Finally, you create the sliding windows file that will be needed later for doing the phylogenetic files!:
+cat sliding_windows_aphanius_one_line2.fa |grep AT29861 > AT29861_sliding_windows.txt
+cat AT29861_sliding_windows.txt |cut -f2 -d: > sliding_windows.txt
+sed -i 's/^/:/g' sliding_windows.txt
