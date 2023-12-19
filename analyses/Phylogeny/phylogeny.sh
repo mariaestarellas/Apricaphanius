@@ -28,7 +28,7 @@ cat *no_chr.fa > all_sequences.fa
 awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < all_sequences.fa > sliding_windows_aphanius_one_line.fa
 
 #5 Sliding windows
-seqkit sliding all_sequences.fa -s 1000000 -W 1000000 > sliding_windows_aphanius_one_line.fa
+seqkit sliding all_sequences.fa -s 1000000 -W 1000000 > sliding_windows_aphanius.fa
 
 #You make sure that each observation is only in one line
 bash all_sequences_one_line.sh sliding_windows_leopards.fa
