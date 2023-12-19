@@ -41,3 +41,9 @@ tail -n +2 sliding_windows_aphanius_one_line2.fa > sliding_windows_aphanius_one_
 cat sliding_windows_aphanius_one_line2.fa |grep AT29861 > AT29861_sliding_windows.txt
 cat AT29861_sliding_windows.txt |cut -f2 -d: > sliding_windows.txt
 sed -i 's/^/:/g' sliding_windows.txt
+
+#Create files for the phylogeny
+for i in $(cat sliding_windows2.txt);
+do
+grep -A1 --no-group-separator $i better_sliding_windows_one_line.fa |sed 's/:/_/g' > $i.txt
+done
