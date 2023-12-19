@@ -32,7 +32,7 @@ seqkit sliding all_sequences.fa -s 1000000 -W 1000000 > sliding_windows_aphanius
 
 #You make sure that each observation is only in one line
 bash all_sequences_one_line.sh sliding_windows_leopards.fa
-
+awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' < sliding_windows_aphanius.fa > sliding_windows_aphanius_one_line2.fa
 
 #I don't know why in the first line there is an empty space, so we remove it:
-tail -n +2 sliding_windows_leopards_one_line.fa > sliding_windows_leopards_one_line.tmp && mv sliding_windows_leopards_one_line.tmp sliding_windows_leopards_one_line.fa
+tail -n +2 sliding_windows_aphanius_one_line2.fa > sliding_windows_aphanius_one_line.tmp && mv sliding_windows_aphanius_one_line.tmp sliding_windows_aphanius_one_line2.fa
