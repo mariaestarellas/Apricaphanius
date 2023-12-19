@@ -14,7 +14,7 @@ gunzip *gz
 for i in $(ls ~/DiscoC/aphanius/analyses/phylogeny/*fa); do grep -v ">" "$i" > "$i"_no_chr.fa; done
 
 #3 Add label
-#we need to add the label name to each file. IMPORTANT, this will not work if there is more than one dot in the file_name!
+#we need to add the label name to each file. 
 for i in $(ls *fa);
 do
 id=$(echo $i |cut -d . -f1) 
