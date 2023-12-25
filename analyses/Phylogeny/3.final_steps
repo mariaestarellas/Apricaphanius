@@ -1,0 +1,5 @@
+mkdir new
+for treefile in $(ls *txt.treefile);
+do
+sed 's/_sliding[^:]*//g' "$treefile" > new/new_"$treefile"
+done
