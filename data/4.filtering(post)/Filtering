@@ -15,12 +15,12 @@ bcftools view -S dataset3.txt all_aphanius_genotypes.vcf.gz  > dataset3.vcf.gz
 
 #In theory the < and > were the other way around but that removed almost all SNPs, so I did it this way & it seemed to work. For Dataset 1&2
 /home/goliath/software/gatk-4.1.3.0/gatk SelectVariants -R /home/goliath/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa \
--V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/dataset1.vcf.gz -select "QD > 10.0 && MQ > 55.0 && FS < 50.0 && SOR < 5.0 && MQRankSum > -5.0 && MQRankSum < 5.0 && ReadPosRankSum > -5.0 && ReadPosRankSum < 5.0" -O  dataset1_gatk_try.vcf.gz
+-V /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/dataset1.vcf.gz -select "QD > 10.0 && MQ > 55.0 && FS < 50.0 && SOR < 5.0 && MQRankSum > -5.0 && MQRankSum < 5.0 && ReadPosRankSum > -5.0 && ReadPosRankSum < 5.0" -O  dataset1_gatk_temp.vcf.gz
 
 
 #We only keep biallelic snps, remove indels, filter for quality > 30, coverage and missing data:
 #For the DP we do for the min 1/3 of the coverage and for the max 2x
-vcftools --gzvcf dataset1_gatk_try.vcf.gz --min-alleles 2 --max-alleles 2 --remove-indels --minQ 30 --minDP 2 --maxDP 20 --max-missing 0.8  --maf 0.001 --recode --stdout |gzip -c > dataset1_filtered.vcf.gz
+vcftools --gzvcf dataset1_gatk_temp.vcf.gz --min-alleles 2 --max-alleles 2 --remove-indels --minQ 30 --minDP 2 --maxDP 20 --max-missing 0.8  --maf 0.001 --recode --stdout |gzip -c > dataset1_filtered.vcf.gz
 
 #Select only unlinked snps for Population structure analyses. 
 # -m usually is set at 0.1 but this is too restrictive, we use 0.5. 
