@@ -10,7 +10,9 @@ bcftools mpileup -C50 -f ~/DiscoC/aphanius/copy_data/reference_genome/assembly/A
  
 #2) Now we can run psmc:
 
-psmc –N25 -t150 -r2 -p "4+25*2+4+6" -o CN21596_diploid.psmc CN21596_diploid.psmcfa
+psmc –N25 -t15 -r2 -p "4+25*2+4+6" -o CN21596_diploid.psmc CN21596_diploid.psmcfa
+psmc -N25 -t15 -p "4+25*2+4+6" -o AT30199_diploid.psmc AT30199_diploid.psmcfa 
+#i ran psmc in panthera bc goliath gave an error
 
 #3) Time to Plot.
 #We need to take into consideration which is the generation time (-g) which in our case is 2 per year and the mutation rate (-u) which is 3.5x10-9 bp/generation. 
