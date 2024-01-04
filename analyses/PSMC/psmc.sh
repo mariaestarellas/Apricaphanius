@@ -3,6 +3,7 @@
 #1) We need a .bam file as an input and the reference genome. This analysis is done for each sample (which needs to be at higher coverage). We need to set -d to 1/3 of our coverage and -D to the double
 
 bcftools mpileup -C50 -f ~/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa /home/goliath/DiscoC/aphanius/copy_data/filtered/high_coverage/AT30199_mkdup_30.bam | bcftools call -c - | vcfutils.pl vcf2fq -d 5.23  -D 31.43 | gzip > AT30199_diploid.fq.gz
+bcftools mpileup -C50 -f ~/DiscoC/aphanius/copy_data/reference_genome/assembly/AphaniusSeq_MaSuRCA-polished.fa /home/goliath/DiscoC/aphanius/copy_data/filtered/high_coverage/AT6981_mkdup_30.bam | bcftools call -c - | vcfutils.pl vcf2fq -d 3.562  -D 21.372 | gzip > AT6981_diploid
 
 #-q is the quality filtering
 /home/panthera/software/psmc/utils/fq2psmcfa -q20 CN21596_diploid.fq.gz > CN21596_diploid.psmcfa 
