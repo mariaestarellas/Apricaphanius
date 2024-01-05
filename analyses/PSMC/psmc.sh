@@ -19,6 +19,7 @@ psmc -N25 -t15 -p "4+25*2+4+6" -o AT30199_diploid.psmc AT30199_diploid.psmcfa
 #We need to take into consideration which is the generation time (-g) which in our case is 2 per year and the mutation rate (-u) which is 3.5x10-9 bp/generation. 
 
 softwares/psmc/utils/psmc_plot.pl -u 3.5e-9 -g 0.5 diploid diploid.psmc 
+/home/panthera/software/psmc/utils/psmc_plot.pl -u 3.5e-9 -g 0.5 AT30199 AT30199_diploid.psmc
 
 #4) Finally bootstrap (10)
 #First, we need to split the psmcfa file into shorter fragments. 
