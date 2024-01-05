@@ -29,9 +29,9 @@ softwares/psmc/utils/psmc_plot.pl -u 3.5e-9 -g 0.5 diploid diploid.psmc
 #Now do an iterative loop to do 10 rounds. Don't forget the -b flag!
 
 for i in $(seq 1 10);
-> do
-> /home/panthera/software/psmc/psmc -N25 -t5 -r2 -b -p "4+25*2+4+6" -o CN21596_round"$i".psmc CN21596_split.psmcfa
-> done
+do
+/home/panthera/software/psmc/psmc -N25 -t5 -r2 -b -p "4+25*2+4+6" -o CN21596_round"$i".psmc CN21596_split.psmcfa
+done
 
 cat *round* CN21596_diploid.psmcfa > CN21596_combined_bs.psmc
 
