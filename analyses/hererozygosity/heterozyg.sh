@@ -1,3 +1,5 @@
+#It's super important that the .txt file is empty/doesn't exist when we run the script!!
+
 vcf="/home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/dataset3.vcf.gz"
 sample="CN21784"
 
