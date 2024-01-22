@@ -9,4 +9,4 @@ mv iberus.bim.tmp iberus.bim
 plink --bfile iberus --recode12 --out iberus --allow-extra-chr
 
 #4 Admixture
-python admixture-wrapper_edited.py -i directory_containing_ped_file --kmin k_minima --kmax k_maxima --reps replicates --cv number_of_cross_validations -t threads 
+python admixture-wrapper_edited.py -i /mnt/DiscoC/aphanius/analyses/admixture --kmin 1 --kmax 10 --reps 20 --cv 20 -t 10 
