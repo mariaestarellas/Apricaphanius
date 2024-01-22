@@ -1,5 +1,5 @@
 #1 Create bed file 
-plink --vcf dataset2_filtered_usnps_.vcf.gz --make-bed --out iberus --allow-extra-chr --double-id
+plink --vcf /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/dataset2_filtered_usnps05.vcf.gz --make-bed --out iberus --allow-extra-chr --double-id
 
 #2 Change bim file (if the first argument is 0, print the whole line)
 awk '{$1=0;print $0}' iberus.bim > iberus.bim.tmp
