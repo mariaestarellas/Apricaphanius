@@ -20,3 +20,4 @@ python admixture-wrapper_edited.py -i /mnt/DiscoC/aphanius/analyses/admixture/al
 
 #Considerations for plotting. We have to run the script but only take the best rep for each k. We have to look at the iberus.CV_All.txt file and delete all the rest of the files. This file only has the number of the K (not of the repeat). 
 #Also, we need to give it a file with 2 columns, one with the individual and one with the population. Finally we also give it the order we want it to appear in the plot, but we don't know what will look best until we've seen a first plot, so do a random order and then edit it for visualization. 
+#Usage: plotADMIXTURE.r -p <prefix> -i <info file, 2-column file with ind name and population/species name> -k <max K value> -pop <comma-separated list of populations/species in the order to be plotted>
