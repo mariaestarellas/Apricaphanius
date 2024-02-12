@@ -1,12 +1,22 @@
 #1 Create bed file 
-plink --vcf /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/dataset2_filtered_usnps05.vcf.gz --make-bed --out iberus --allow-extra-chr --double-id
+plink --vcf /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/2.aphanius_iberus/dataset2_rmrep_gatk_nomissing_usnps05.vcf.gz --make-bed --out iberus --allow-extra-chr --double-id
+plink --vcf /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/1.all_aphanius/dataset1_rmrep_gatk_nomissing_usnps05.vcf.gz --make-bed --out all_aphanius --allow-extra-chr --double-id
 
 #2 Change bim file (if the first argument is 0, print the whole line)
 awk '{$1=0;print $0}' iberus.bim > iberus.bim.tmp
 mv iberus.bim.tmp iberus.bim
 
+awk '{$1=0;print $0}' all_aphanius.bim > all_aphanius.bim.tmp
+mv all_aphanius.bim.tmp all_aphanius.bim
+
 #3 Create ped
 plink --bfile iberus --recode12 --out iberus --allow-extra-chr
+plink --bfile all_aphanius --recode12 --out all_aphanius --allow-extra-chr
 
-#4 Admixture
-python admixture-wrapper_edited.py -i /mnt/DiscoC/aphanius/analyses/admixture --kmin 1 --kmax 10 --reps 20 --cv 20 -t 10 
+#4 Admixture. CV of 10 to explore, to be more robust do 20 for the good one. 
+python admixture-wrapper_edited.py -i /mnt/DiscoC/aphanius/analyses/admixture/iberus --kmin 1 --kmax 10 --reps 10 --cv 20 -t 20
+python admixture-wrapper_edited.py -i /mnt/DiscoC/aphanius/analyses/admixture/all_aphanius --kmin 1 --kmax 12 --reps 10 --cv 20 -t 20
+
+
+#Considerations for plotting. We have to run the script but only take the best rep for each k. We have to look at the iberus.CV_All.txt file and delete all the rest of the files. This file only has the number of the K (not of the repeat). 
+#Also, we need to give it a file with 2 columns, one with the individual and one with the population. Finally we also give it the order we want it to appear in the plot, but we don't know what will look best until we've seen a first plot, so do a random order and then edit it for visualization. 
