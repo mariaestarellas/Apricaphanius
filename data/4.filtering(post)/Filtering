@@ -42,4 +42,7 @@ vcftools --gzvcf dataset1_rmrep_gatk.vcf.gz --min-alleles 2 --max-alleles 2 --re
 
 #Select only unlinked snps for Population structure analyses. 
 # -m usually is set at 0.1 but this is too restrictive, we use 0.5. 
-bcftools +prune dataset1_filtered.vcf.gz -m 0.5 -O z -o dataset1_filtered_usnps05.vcf.gz
+bcftools +prune dataset1_rmrep_gatk_90.vcf.gz -m 0.5 -O z -o dataset1_rmrep_gatk_90_usnps05.vcf.gz
+
+#count snps
+zgrep -v "#" dataset1_rmrep_gatk_90.vcf.gz | wc -l
