@@ -8,7 +8,7 @@ window=100000
 for sample in $(cat $sample);
 do
 	rm "$sample"_heterozygosity.txt
-	for region in $(cat complete_windows.txt);
+	for region in $(cat complete_windows_temp.txt);
 	do
 	callable=$(tabix -h $vcf $region | vcftools --gzvcf - --indv $sample --remove-indels --max-alleles 2 --minQ 30 --minDP 2 --maxDP 300 --stdout --recode --recode-INFO-all | grep -v '#' | wc -l ) 
 		if [ $callable -gt 0 ];
