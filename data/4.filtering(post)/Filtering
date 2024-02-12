@@ -46,3 +46,25 @@ bcftools +prune dataset1_rmrep_gatk_90.vcf.gz -m 0.5 -O z -o dataset1_rmrep_gatk
 
 #count snps
 zgrep -v "#" dataset1_rmrep_gatk_90.vcf.gz | wc -l
+
+SNPS
+Dataset1
+80	17680769
+90	17258889
+nomissing	7248998
+
+Dataset2
+80	14857228
+90	14596570
+nomissing	8952228
+
+uSNPS
+Dataset1
+80	1859449
+90	1821342
+nomissing	1160109
+
+Dataset2
+80	1743332
+90	1717450
+nomissing	1339194
