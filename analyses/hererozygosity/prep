@@ -4,6 +4,13 @@ cut -f1,2 /home/goliath/DiscoC/aphanius/copy_data/reference_genome/assembly/Apha
 awk '$2 >= 1000000' sizes.genome > complete_sizes.genome
 bedtools makewindows -g complete_sizes.genome -w 100000 > windows.txt
 
+#as our genome has weird contig names including : which gave problems for posterior steps, we changed the contig names for dataset1. 
+awk '$1' windows.txt > original_contigs.txt
+sed -i 's/:/;/g' original_contigs.tx > edited_contigs.txt
+paste -d' ' original_contigs.txt edited_contigs.txt > renamecontigs.txt
+bcftools index dataset1.vcf.gz
+bcftools annotate --rename-chrs renamecontigs.txt dataset1.vcf.gz -Oz -o renamed_dataset1.vcf.gz
+
 awk '{ $2 = $2 + 1 }1' windows.txt > windows2.txt #avoid windows to overlap 
 awk ' { print $1 "." $2 ";" $NF } ' windows2.txt > complete_windows_temp.txt # merge columns 1, 2 and 3 
 ##sed -i 's/&0/&1/g'
