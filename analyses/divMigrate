@@ -1,0 +1,4 @@
+#This is the R funtion. For the input file we need Arlequin genotype file format (.arp), or the genepop file format. Stat is which statistic should be used to calculate relative migration between samples, d_jost is the default. 
+divMigrate(infile = NULL, stat = "d_jost")
+
+  #Get the correct input file with  PGDSpider
