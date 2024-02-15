@@ -10,6 +10,8 @@ sed -i 's/:/;/g' original_contigs.tx > edited_contigs.txt
 paste -d' ' original_contigs.txt edited_contigs.txt > renamecontigs.txt
 bcftools index dataset1.vcf.gz
 bcftools annotate --rename-chrs renamecontigs.txt dataset1.vcf.gz -Oz -o renamed_dataset1.vcf.gz
+tabix -p vcf renamed_dataset1.vcf.gz #Index the vcf file
 
 awk '{ $2 = $2 + 1 }1' windows.txt > windows2.txt #avoid windows to overlap 
 awk ' { print $1 ":" $2 "." $NF } ' windows2.txt > complete_windows_temp.txt # merge columns 1, 2 and 3 
+
