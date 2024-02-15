@@ -12,5 +12,4 @@ bcftools index dataset1.vcf.gz
 bcftools annotate --rename-chrs renamecontigs.txt dataset1.vcf.gz -Oz -o renamed_dataset1.vcf.gz
 
 awk '{ $2 = $2 + 1 }1' windows.txt > windows2.txt #avoid windows to overlap 
-awk ' { print $1 "." $2 ";" $NF } ' windows2.txt > complete_windows_temp.txt # merge columns 1, 2 and 3 
-##sed -i 's/&0/&1/g'
+awk ' { print $1 ":" $2 "." $NF } ' windows2.txt > complete_windows_temp.txt # merge columns 1, 2 and 3 
