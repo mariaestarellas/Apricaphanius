@@ -5,6 +5,7 @@
 
 bcftools view -S dataset3.txt all_aphanius_genotypes.vcf.gz  > dataset3.vcf.gz
 bgzip dataset3.vcf.gz
+tabix -p vcf dataset3.vcf.gz
 
 #We have to create a table with different fields of the VCF. With the -F flag we can specify which fiels we want to extract. 
 #QD= Quality Depth, MQ= Mapping Quality, FS= Fisher Strand test, SOR= StrandOddsRatio, MQRankSum, ReadPosRankSum. 
