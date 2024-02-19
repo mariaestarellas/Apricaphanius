@@ -1,0 +1,40 @@
+0) https://www.nature.com/articles/s41467-018-05257-7
+
+1) /data/software/plink1.9/plink --vcf dataset1_rmrep_gatk_80.vcf.gz 
+--recode transpose --out dataset1_rmrep_gatk_80 --allow-extra-chr
+
+2) head dataset1_rmrep_gatk_80.tfam
+AT29861 AT29861 0 0 0 -9
+AT30199.2 AT30199.2 0 0 0 -9
+AT6981.2 AT6981.2 0 0 0 -9
+AT 29056 0 0 0 -9
+AT 29067 0 0 0 -9
+AT 29087 0 0 0 -9
+AT 29851 0 0 0 -9
+AT 4839 0 0 0 -9
+AT 5157 0 0 0 -9
+CN21582 CN21582 0 0 0 -9
+
+awk '{print $1" "$2" "$3" "$4" "$5" "$1}'  dataset1_rmrep_gatk_80.tfam | head
+AT29861 AT29861 0 0 0 AT29861
+AT30199.2 AT30199.2 0 0 0 AT30199.2
+AT6981.2 AT6981.2 0 0 0 AT6981.2
+AT 29056 0 0 0 AT
+AT 29067 0 0 0 AT
+AT 29087 0 0 0 AT
+AT 29851 0 0 0 AT
+AT 4839 0 0 0 AT
+AT 5157 0 0 0 AT
+CN21582 CN21582 0 0 0 CN21582
+
+3) sudo perl /data/software/Structf4/Tped2Structf4.pl 
+dataset1_rmrep_gatk_80.tped dataset1_rmrep_gatk_80.tfam 5000000 
+output_blocks/ 0
+
+4) find  output_blocks/ -name "*out_genetic" > calcf4.filelist
+
+5) ./Calc-f4 -i calcf4.filelist -n 46 -t 50 | gzip -f > calcf4.f4.gz
+6) for K in `seq 2 10`; do
+      Rscript Struct-f4.r -f calcf4.f4.gz -K 7 -p 
+calcf4.f4.$K.plots.pdf -m 50000000 -n 50000000 -T 5 > calcf4.$K.f4.out
+done
