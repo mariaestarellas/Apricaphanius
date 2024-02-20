@@ -1,4 +1,22 @@
 #This is the R funtion. For the input file we need Arlequin genotype file format (.arp), or the genepop file format. Stat is which statistic should be used to calculate relative migration between samples, d_jost is the default. 
-divMigrate(infile = NULL, stat = "d_jost")
+divMigrate(infile = file.arp, outfile = iberus, boots = 100, stat = "all",  filter_threshold = 0, plot_network = FALSE,  plot_col = "darkblue", para = FALSE)
 
-  #Get the correct input file with  PGDSpider
+infile
+Input genepop file name or path.
+outfile
+String prefix to be added to the results directory. If left NULL, no networks will be written to file.
+boots
+The number of bootstrap iteration to carry out for calculating mean relative migration and 95% confidence intervals.
+stat
+A character string indicating which statistic should be used to estimate relative migration between populations. The argument accepts one of the following: "d" (Jost's D), "gst" (Nei's Gst), "Nm" (Alcala et al, 2014) or "all" (all of the preceeding statistics; default).
+filter_threshold
+The minimum relative migration value for which edges in the networks should be displayed.
+plot_network
+A logical argument, specifying whether migration results should be plotted in a network.
+plot_col
+Defines the colour of edges in networks. Default is set to "darkblue".
+para
+A logical argument, specifying if multiple CPUs should be used when available.
+
+#Get the correct input file with  PGDSpider
+java -Xmx1024m -Xms512M -jar PGDSpider2-cli.jar -inputfile file.vcf -inputformat VCF -outputfile file.arp -outputformat ARLEQUIN -spid file.spid
