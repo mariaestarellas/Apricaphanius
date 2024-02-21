@@ -19,4 +19,6 @@ para
 A logical argument, specifying if multiple CPUs should be used when available.
 
 #Get the correct input file with  PGDSpider: http://cmpg.unibe.ch/software/PGDSpider/PGDSpider%20manual_vers%202-1-1-5.pdf
-java -Xmx1024m -Xms512M -jar PGDSpider2-cli.jar -inputfile file.vcf -inputformat VCF -outputfile file.arp -outputformat ARLEQUIN -spid file.spid
+#This opens the GUI
+java -Xmx5000m -Xms512M -jar PGDSpider2.jar
+
