@@ -1,0 +1,8 @@
+#https://github.com/Sandman2127/VCF2ArlequinDiploid
+#Getting the correct input format is being a nightmare
+conda create -n py37
+conda install -n py37 python=3.7
+conda activate py37
+#We need the VCF2Arlequin.py, the arpFormat.py, our vcf and a tab delimited txt file with sample name  population. 
+
+python VCF2ArlequinDiploid.py --vcf ~/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/2.aphanius_iberus/dataset2_rmrep_gatk_nomissing.vcf --popFile pop.txt
