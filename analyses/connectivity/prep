@@ -6,3 +6,6 @@ conda activate py37
 #We need the VCF2Arlequin.py, the arpFormat.py, our vcf and a tab delimited txt file with sample name  population. 
 
 python VCF2ArlequinDiploid.py --vcf ~/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/2.aphanius_iberus/dataset2_rmrep_gatk_nomissing.vcf --popFile pop.txt
+
+#retry PGDspider in goliath
+java -Xmx10000m -Xms512M -jar ~/miniconda3/share/pgdspider-2.1.1.5-1/PGDSpider2-cli.jar PGDSpiderCli -inputfile ~/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/2.aphanius_iberus/dataset2_rmrep_gatk_nomissing.vcf -inputformat VCF -outputfile dataset2_genepop.txt -outputformat GENEPOP -spid vcftogpop.spid 
