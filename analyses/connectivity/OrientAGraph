@@ -1,1 +1,2 @@
-
+conda activate python2
+python plink2treemix.py ~/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/2.aphanius_iberus/dataset2_rmrep_gatk_nomissing_usnps05.vcf pops.clust
