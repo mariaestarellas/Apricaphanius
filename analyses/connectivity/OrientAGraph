@@ -19,3 +19,5 @@ gzip *.frq.strat
 
 #this needs to be python2
 python plink2treemix.py dataset2_rmrep_gatk_nomissing_usnps05.frq.strat.gz dataset2_rmrep_gatk_nomissing_usnps05.treemix.frq.gz
+
+conda activate myenvname
