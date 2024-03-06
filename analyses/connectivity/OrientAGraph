@@ -1,2 +1,21 @@
 conda activate python2
-python plink2treemix.py ~/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/2.aphanius_iberus/dataset2_rmrep_gatk_nomissing_usnps05.vcf pops.clust
+We need a cluster file where each line looks like this & with no header
+CN21582	CN21582	ZOO
+
+
+awk -F"\t" '{
+split($2,chr,":")
+$1="1"
+$2="1:"chr[2]
+print $0
+}' *.map > better.map
+mv better.map *.map
+
+# Next, we convert the .vcf into a stratified frq file, also creating other necessary files:
+#this needs to be plink 1.9!!
+/home/goliath/miniconda3/bin/plink --bfile dataset2_rmrep_gatk_nomissing_usnps05 --freq --missing --within aphanius_iberus.clu --out dataset2_rmrep_gatk_nomissing_usnps05 --allow-no-sex --allow-extra-chr --set-missing-var-ids @:#
+
+gzip *.frq.strat
+
+#this needs to be python2
+python plink2treemix.py dataset2_rmrep_gatk_nomissing_usnps05.frq.strat.gz dataset2_rmrep_gatk_nomissing_usnps05.treemix.frq.gz
