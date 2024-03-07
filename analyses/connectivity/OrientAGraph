@@ -1,12 +1,12 @@
 https://speciationgenomics.github.io/Treemix/
+#We are doing this with a file with all SNPs (not uSNPs bc we have to filter this out after with orientagraph)
+Actually, I ended up seeing that it can all be done by running  bash vcf2treemix.sh dataset1_rmrep_gatk_nomissing.vcf.gz all_aphanius.clu and having the plink2treemix.py script in the same folder. 
 
-plink --vcf /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/1.all_aphanius/dataset1_rmrep_gatk_nomissing.vcf.gz --allow-extra-chr --double-id --make-bed --out aph_iberus_nomissing
+plink --vcf /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/1.all_aphanius/dataset1_rmrep_gatk_nomissing.vcf.gz --allow-extra-chr --double-id --make-bed --out dataset1_rmrep_gatk_nomissing
 
 conda activate python2
 We need a cluster file where each line looks like this & with no header
 CN21582	CN21582	ZOO
-
-vcf2treemix.sh /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/1.all_aphanius/dataset1_rmrep_gatk_nomissing.vcf.gz all_aphanius.clu
 
 awk -F"\t" '{
 split($2,chr,":")
@@ -19,7 +19,7 @@ mv better.map dataset1_rmrep_gatk_nomissing.map
 
 # Next, we convert the .vcf into a stratified frq file, also creating other necessary files:
 #this needs to be plink 1.9!!
-/home/goliath/miniconda3/bin/plink --bfile dataset1_rmrep_gatk_nomissing --freq --missing --within aphanius_iberus.clu --out dataset1_rmrep_gatk_nomissing --allow-no-sex --allow-extra-chr --set-missing-var-ids @:#
+/home/goliath/miniconda3/bin/plink --bfile dataset1_rmrep_gatk_nomissing --freq --missing --within all_aphanius.clu --out dataset1_rmrep_gatk_nomissing --allow-no-sex --allow-extra-chr --set-missing-var-ids @:#
 
 gzip *.frq.strat
 
@@ -28,3 +28,10 @@ python plink2treemix.py dataset1_rmrep_gatk_nomissing.frq.strat.gz dataset1_rmre
 
 conda activate myenvname
 orientagraph -se -i  dataset2_rmrep_gatk_nomissing_usnps05.treemix.frq.gz -m 1 -k 1 -o output_*_m1_k$i -global
+for m in {0..10};
+do 
+  for rep in {0..10};                                                                                                                                 
+   do                                                                                                                                                  
+   orientagraph -i dataset1_rmrep_gatk_nomissing.treemix.gz -m $m -o dataset1_rmrep_gatk_nomissing.treemix.m$m.rep$rep -root Anatoliae -bootstrap -k $k -noss > treemix_m${m}_k${k}.log ;                                                                                                                                                                                                                                                                                             
+  done;
+done
