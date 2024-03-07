@@ -21,3 +21,4 @@ gzip *.frq.strat
 python plink2treemix.py dataset2_rmrep_gatk_nomissing_usnps05.frq.strat.gz dataset2_rmrep_gatk_nomissing_usnps05.treemix.frq.gz
 
 conda activate myenvname
+orientagraph -se -i  dataset2_rmrep_gatk_nomissing_usnps05.treemix.frq.gz -m 1 -k 1 -o output_*_m1_k$i -global
