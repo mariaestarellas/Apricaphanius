@@ -37,3 +37,15 @@ for m in {1..10};
 do                                                                                                                                  
    orientagraph -i dataset1_rmrep_gatk_nomissing.treemix.frq.gz -m $m -o try2/dataset1_rmrep_gatk_nomissing.treemix.m$m -root Anatolicus -bootstrap -k 500 -noss > treemix_m${m}.log ;
 done
+
+#The following loop was provided by Valéria
+for m in {0..5};                                                                                                                                        
+do                                                                                                                                                      
+ for k in 2 4 6 8 10 15 20;                                                                                                                            
+ do                                                                                                                                                    
+   for rep in {0..10};                                                                                                                                 
+   do                                                                                                                                                  
+   treemix -i diamina-dn-cl85-filt1.sing.miss.thin.treemix.gz -m $m -o diamina-dn-cl85-filt1.sing.miss.thin.treemix.m$m.k$k.rep$rep -root Mprot_outgrp -bootstrap -k $k -noss > treemix_m${m}_k${k}.log ;
+   done;                                                                                                                                               
+ done;                                                                                                                                                 
+done  
