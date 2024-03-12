@@ -1,0 +1,1 @@
+vcftools --vcf dataset2_rmrep_gatk_nomissing.vcf --recode --recode-INFO-all --thin 50000 --out "thin/snp-thin"
