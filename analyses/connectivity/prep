@@ -9,3 +9,6 @@ python VCF2ArlequinDiploid.py --vcf ~/DiscoC/aphanius/copy_data/filtered/haploty
 
 #retry PGDspider in goliath
 nohup java -Xmx300G -jar ~/miniconda3/share/pgdspider-2.1.1.5-1/PGDSpider2-cli.jar PGDSpiderCli -inputfile ~/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/2.aphanius_iberus/dataset2_rmrep_gatk_nomissing.vcf -inputformat VCF -outputfile dataset2_genepop.txt -outputformat GENEPOP -spid vcftogpop.spid &
+
+#what actually worked: 
+vcf2gpop_editin.R
