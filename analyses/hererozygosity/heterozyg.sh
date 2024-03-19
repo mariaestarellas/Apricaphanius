@@ -14,7 +14,7 @@ do
 		if [ $callable -gt 0 ];
 		then
 			value=${region#*:}
-			start=$(echo "$value" |cut -d. -f1)
+			start=$(echo "$value" |cut -d- -f1)
 			chrom=$(echo "$region" |cut -d: -f1)
 			tabix -h $vcf $region | vcftools --gzvcf - --indv $sample --remove-indels --max-alleles 2 --minQ 30 --minDP 2 --maxDP 300 --stdout --recode --recode-INFO-all | vcflib vcfhetcount | tail -n 1 | awk -v l="$callable" -v chrom="$chrom" -v start="$start" -v window="$window" '{print chrom"\t"start+window"\t"$1"\t"l"\t"$1/l}' | tee -a "$sample"_heterozygosity.txt
 		else
