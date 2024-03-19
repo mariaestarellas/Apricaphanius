@@ -15,3 +15,4 @@ tabix -p vcf renamed_dataset1.vcf.gz #Index the vcf file
 awk '{ $2 = $2 + 1 }1' windows.txt > windows2.txt #avoid windows to overlap 
 awk ' { print $1 ":" $2 "." $NF } ' windows2.txt > complete_windows_temp.txt # merge columns 1, 2 and 3 
 
+#we run this on the unfitered dataset of all snps
