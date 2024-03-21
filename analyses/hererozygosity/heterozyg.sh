@@ -1,14 +1,14 @@
 #It's super important that the .txt file is empty/doesn't exist when we run the script!!
 #value=${region#*:} it keeps what's left from the & symbol.
 
-vcf="renamed_dataset1.vcf.gz"
+vcf="easynames_dataset1.vcf.gz"
 sample="dataset1.txt"
 window=100000
 
 for sample in $(cat $sample);
 do
 	rm "$sample"_heterozygosity.txt
-	for region in $(cat  complete_windows_temp.txt);
+	for region in $(cat  easy_complete_windows_temp.txt);
 	do
 	callable=$(tabix -h $vcf $region | vcftools --gzvcf - --indv $sample --remove-indels --max-alleles 2 --minQ 30 --minDP 2 --maxDP 300 --stdout --recode --recode-INFO-all | grep -v '#' | wc -l ) 
 		if [ $callable -gt 0 ];
