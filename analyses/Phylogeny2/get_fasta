@@ -1,3 +1,11 @@
 #From our VCF file without missing data. 
 #Remove alternative alleles
 bcftools view -a --min-ac=1 -o dataset1_rmrep_gatk_nomissing_t2.vcf.gz /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/1.all_aphanius/dataset1_rmrep_gatk_nomissing.vcf.gz
+
+#Remove spanning deletions: they are represented with an *
+ruby ~/DiscoC/aphanius/analyses/phylogeny/scriptsberni/10_replace_spanning_deletions.rb dataset1_rmrep_gatk_nomissing_t2.vcf dataset1_rmrep_gatk_nomissing_t2.2.vcf
+
+## Fill the AN and AC INFO fields.
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+  cat dataset1_rmrep_gatk_nomissing_t2.2.vcf | fill-an-ac > dataset1_rmrep_gatk_nomissing_t3.vcf
