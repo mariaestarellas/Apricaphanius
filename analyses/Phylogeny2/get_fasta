@@ -1,1 +1,3 @@
-
+#From our VCF file without missing data. 
+#Remove alternative alleles
+bcftools view -a --min-ac=1 -o dataset1_rmrep_gatk_nomissing_t2.vcf.gz /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/1.all_aphanius/dataset1_rmrep_gatk_nomissing.vcf.gz
