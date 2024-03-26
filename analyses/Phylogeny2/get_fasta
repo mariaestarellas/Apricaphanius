@@ -9,3 +9,10 @@ ruby ~/DiscoC/aphanius/analyses/phylogeny/scriptsberni/10_replace_spanning_delet
 ##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
 ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
   cat dataset1_rmrep_gatk_nomissing_t2.2.vcf | fill-an-ac > dataset1_rmrep_gatk_nomissing_t3.vcf
+
+## Remove sites that are no longer polymorphic.
+# Exclude sites that AC = 0 or that all alleles are equal to the alternative allele, so 
+bcftools view -e 'AC==0 || AC==AN' -o dataset1_rmrep_gatk_nomissing_t4.vcf dataset1_rmrep_gatk_nomissing_t3.vcf
+
+bcftools annotate -x 'FORMAT' dataset1_rmrep_gatk_nomissing_t4.vcf | bcftools query -f '[\t%TGT]\n' -o dataset1_rmrep_gatk_nomissing_F5.vcf 
+rm dataset1_rmrep_gatk_nomissing_t*
