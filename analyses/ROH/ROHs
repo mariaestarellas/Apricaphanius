@@ -2,5 +2,5 @@
 
 #In this example, the FORMAT/PL annotation is not present, therefore we must use FORMAT/GT, see the -G option. Also, the VCF does not contain allele frequency information and there is just one sample so it cannot be estimated on the fly. Hence we use a default AF value 0.4.
 
-bcftools roh -G30 --AF-dflt 0.4 dataset2_rmrep_gatk_nomissing.vcf > roh.txt
+bcftools roh -G30 --AF-dflt 0.4 renamed_dataset2_rmrep_gatk_nomissing.vcf.gz > roh.txt
 
