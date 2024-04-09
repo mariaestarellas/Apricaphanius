@@ -1,6 +1,6 @@
-#there seems to be a problem with the maf, so we filter very thoroughly.
-vcftools --gzvcf dataset1_rmrep_gatk_nomissing.vcf.gz -maf 0.00000000001 gzip -c > dataset1_rohs.vcf.gz
+#there seems to be a problem with the maf?
 
 #In this example, the FORMAT/PL annotation is not present, therefore we must use FORMAT/GT, see the -G option. Also, the VCF does not contain allele frequency information and there is just one sample so it cannot be estimated on the fly. Hence we use a default AF value 0.4.
 
-bcftools roh -G30 --AF-dflt 0.4 dataset1_rohs.vcf.gz
+bcftools roh -G30 --AF-dflt 0.4 dataset2_rmrep_gatk_nomissing.vcf > roh.txt
+
