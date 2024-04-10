@@ -1,6 +1,9 @@
 #there seems to be a problem with the maf?
+#rename the dataset
+bcftools annotate --rename-chrs ~/DiscoC/aphanius/analyses/heterozigosity/new/easynames.txt /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/2.aphanius_iberus/dataset2_rmrep_gatk_nomissing.vcf.gz -Oz -o renamed_dataset2_rmrep_gatk_nomissing.vcf.gz
 
+#Run roh option from bcftools
 #In this example, the FORMAT/PL annotation is not present, therefore we must use FORMAT/GT, see the -G option. Also, the VCF does not contain allele frequency information and there is just one sample so it cannot be estimated on the fly. Hence we use a default AF value 0.4.
-
 bcftools roh -G30 --AF-dflt 0.4 renamed_dataset2_rmrep_gatk_nomissing.vcf.gz > roh.txt
 
+#exectute script 1 and 2
