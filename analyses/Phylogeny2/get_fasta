@@ -14,5 +14,11 @@ ruby ~/DiscoC/aphanius/analyses/phylogeny/scriptsberni/10_replace_spanning_delet
 # Exclude sites that AC = 0 or that all alleles are equal to the alternative allele, so 
 bcftools view -e 'AC==0 || AC==AN' -o dataset1_rmrep_gatk_nomissing_t4.vcf dataset1_rmrep_gatk_nomissing_t3.vcf
 
-bcftools annotate -x 'FORMAT' dataset1_rmrep_gatk_nomissing_t4.vcf | bcftools query -f '[\t%TGT]\n' -o dataset1_rmrep_gatk_nomissing_F5.vcf 
-rm dataset1_rmrep_gatk_nomissing_t*
+vcftools --vcf dataset1_rmrep_gatk_nomissing_t4.vcf --max-missing 0.9 --recode --out dataset1_rmrep_gatk_nomissing_t5.vcf
+ruby ~/DiscoC/aphanius/analyses/phylogeny/scriptsberni/10_replace_spanning_deletions.rb  dataset1_rmrep_gatk_nomissing_t5.vcf dataset1_rmrep_gatk_nomissing_t6.2.vcf
+
+bcftools annotate -x 'FORMAT' dataset1_rmrep_gatk_nomissing_t6.2.vcf | bcftools query -f '[\t%TGT]\n' -o dataset1_rmrep_gatk_nomissing_F7.vcf 
+
+#change the . for N and | for /
+sed -i 's/\./N/g' dataset1_rmrep_gatk_nomissing_F7.vcf
+sed -i 's+|+/+g' dataset1_rmrep_gatk_nomissing_F7.vcf
