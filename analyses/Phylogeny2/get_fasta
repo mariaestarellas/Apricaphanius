@@ -22,3 +22,21 @@ bcftools annotate -x 'FORMAT' dataset1_rmrep_gatk_nomissing_t6.2.vcf | bcftools 
 #change the . for N and | for /
 sed -i 's/\./N/g' dataset1_rmrep_gatk_nomissing_F7.vcf
 sed -i 's+|+/+g' dataset1_rmrep_gatk_nomissing_F7.vcf
+
+#execute the following R script. 
+Rscript /home/goliath/DiscoC/aphanius/analyses/phylogeny/scriptsberni/01.b_select_allels_at_random.R \
+/home/goliath/DiscoC/aphanius/analyses/phylogeny/fasta \
+/home/goliath/DiscoC/aphanius/analyses/phylogeny/fasta/samples.txt \
+out \
+dataset1_rmrep_gatk_nomissing_F7.vcf
+
+path_vcf=/home/goliath/DiscoC/aphanius/analyses/phylogeny/fasta/
+outfile=/home/goliath/DiscoC/aphanius/analyses/phylogeny/fasta/APhanius_all.fasta
+
+for ID in $(cat ${path_vcf}/samples.txt); do
+    echo ">${ID}" >> $outfile
+    touch consensus_${ID}.sqq
+    cat ${path_vcf}/${ID}_Asaccus_ML.sequence >> consensus_${ID}.sqq
+    echo "$(cat consensus_${ID}.sqq)" | awk '{print}' ORS='' >> $outfile
+    echo >> $outfile
+done
