@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#Run iqtree for all the genes separately if flag -m is specified, a specific model will be used
+# if not specified, iqtree will search for the best model in each gene
+
+WD=/home/goliath/DiscoC/aphanius/analyses/phylogeny
+indir=${WD}/fasta/windows
+outdir=${WD}/fasta/windows/trees
+mkdir -p $outdir
+
+N=2
+for infile in ${indir}/*.fa; do
+(
+
+prefix=$(basename ${infile%.fa})
+
+
+iqtree -s ${infile} -m GTR+ASC -B 1000 -T AUTO --threads-max 10 -st DNA --prefix ${outdir}/$prefix
+
+) &
+
+    # allow to execute up to $N jobs in parallel
+    if [[ $(jobs -r -p | wc -l) -ge $N ]]; then
+        # now there are $N jobs already running, so wait here for any job
+        # to be finished so there is a place to start next one.
+        wait -n
+    fi
+echo "Starting new tree"
+
+done
+
