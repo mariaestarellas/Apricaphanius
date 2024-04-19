@@ -14,6 +14,11 @@ ruby ~/DiscoC/aphanius/analyses/phylogeny/scriptsberni/10_replace_spanning_delet
 # Exclude sites that AC = 0 or that all alleles are equal to the alternative allele, so 
 bcftools view -e 'AC==0 || AC==AN' -o dataset1_rmrep_gatk_nomissing_t4.vcf dataset1_rmrep_gatk_nomissing_t3.vcf
 
+
+#################
+Actually this previos part was not necessary... ups
+#################
+
 vcftools --vcf dataset1_rmrep_gatk_nomissing_t4.vcf --max-missing 0.9 --recode --out dataset1_rmrep_gatk_nomissing_t5.vcf
 ruby ~/DiscoC/aphanius/analyses/phylogeny/scriptsberni/10_replace_spanning_deletions.rb  dataset1_rmrep_gatk_nomissing_t5.vcf dataset1_rmrep_gatk_nomissing_t6.2.vcf
 
@@ -40,3 +45,7 @@ for ID in $(cat ${path_vcf}/samples.txt); do
     echo "$(cat consensus_${ID}.sqq)" | awk '{print}' ORS='' >> $outfile
     echo >> $outfile
 done
+
+###### 
+we get 5807101 SNPs
+#####
