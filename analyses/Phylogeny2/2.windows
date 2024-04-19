@@ -1,0 +1,13 @@
+#create sliding windows
+seqkit sliding APhanius_all_edited.fasta -s 10000 -W 10000 > windows/AllAphanius_10000.fa
+
+#is followed by a newline character and separates sequences from different headers with a newline. It concatenates the sequence lines without additional newline characters.
+awk '/^>/ {printf("\n%s\n",$0);next; } { printf("%s",$0);}  END {printf("\n");}' <  windows/AllAphanius_10000.fa > windows/all.fa
+
+grep ">" windows/all.fa | sed 's/>//1'| sed 's/:/\t/1' | sort -k 2n | awk '{print $2}' | uniq > windows/seqs.txt
+
+for win in $(cat windows/seqs.txt)
+do
+grep -A 1 --no-group-separator ":"${win}"$" all.fa | sed "s/_sliding:${win}//1" > windows/Aphanius_$win.fa
+done
+
