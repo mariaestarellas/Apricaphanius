@@ -1,4 +1,7 @@
 #From our VCF file without missing data. 
+#run this, it's SUPER important that the samples.txt file is in the same order as they appear in the vcf
+bcftools query -l /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/1.all_aphanius/dataset1_rmrep_gatk_nomissing.vcf.gz > samples.txt
+
 #Remove alternative alleles
 bcftools view -a --min-ac=1 -o dataset1_rmrep_gatk_nomissing_t2.vcf.gz /home/goliath/DiscoC/aphanius/copy_data/filtered/haplotypecaller/genotypecaller/filtervcf/1.all_aphanius/dataset1_rmrep_gatk_nomissing.vcf.gz
 
@@ -35,13 +38,14 @@ Rscript /home/goliath/DiscoC/aphanius/analyses/phylogeny/scriptsberni/01.b_selec
 out \
 dataset1_rmrep_gatk_nomissing_F7.vcf
 
-path_vcf=/home/goliath/DiscoC/aphanius/analyses/phylogeny/fasta/
+#and now this one to 
+path_vcf=/home/goliath/DiscoC/aphanius/analyses/phylogeny/fasta
 outfile=/home/goliath/DiscoC/aphanius/analyses/phylogeny/fasta/APhanius_all.fasta
 
 for ID in $(cat ${path_vcf}/samples.txt); do
     echo ">${ID}" >> $outfile
     touch consensus_${ID}.sqq
-    cat ${path_vcf}/${ID}_Asaccus_ML.sequence >> consensus_${ID}.sqq
+    cat ${path_vcf}/${ID}_out.sequence >> consensus_${ID}.sqq
     echo "$(cat consensus_${ID}.sqq)" | awk '{print}' ORS='' >> $outfile
     echo >> $outfile
 done
