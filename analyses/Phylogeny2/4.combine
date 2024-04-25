@@ -1,0 +1,19 @@
+swind=10000
+indir=/home/goliath/DiscoC/aphanius/analyses/phylogeny/fasta/windows/trees
+outdir=/home/goliath/DiscoC/aphanius/analyses/phylogeny/fasta/windows/trees/bestree
+mkdir -p $outdir
+
+
+cat ${indir}/*.treefile > ${outdir}/ml_best.trees
+#ls ${indir}/*.ufboot > ${outdir}/ml_boot.txt
+
+cd $outdir
+
+# Run Astral. There are two ways:
+## Attention! If the goal is to generate a species tree, we will have to assign each individual to a species
+#Without bootstrap (it will only give one final tree)
+java -jar /home/goliath/software/Astral/astral.5.7.8.jar -i ml_best.trees -o aphanius_pp.tre
+# With boootstrap /(it will do several trees and we are interested in the last one
+#java -jar /cluster/projects/nn9883k/bernat/vipera/bin/ASTRAL/astral.5.7.8.jar -i ml_best.trees -b ml_boot.txt -o species_boot.tre
+
+#tail -n 1 species_boot.trees > species.trees
