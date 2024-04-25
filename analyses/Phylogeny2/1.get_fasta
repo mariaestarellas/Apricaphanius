@@ -51,5 +51,5 @@ for ID in $(cat ${path_vcf}/samples.txt); do
 done
 
 ###### 
-we get 5807101 SNPs
+we get 5808219 SNPs
 #####
