@@ -7,3 +7,7 @@ bcftools annotate --rename-chrs ~/DiscoC/aphanius/analyses/heterozigosity/new/ea
 bcftools roh -G30 --AF-dflt 0.4 renamed_dataset2_rmrep_gatk_nomissing.vcf.gz > roh.txt
 
 #exectute script 1 and 2
+
+Long: >1Mbp
+Medium: 0.5-1 Mbp
+Short: 0.1-0.5 Mbp
